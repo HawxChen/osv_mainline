@@ -28,6 +28,8 @@
 #include <signal.h>
 #include <sys/select.h>
 #include <sys/mman.h>
+#include <osv/tkill.h>
+#include <osv/exit_group.h>
 
 #include <unordered_map>
 
@@ -38,7 +40,6 @@ extern "C" long gettid()
     return sched::thread::current()->id();
 }
 
-extern int tkill (int tid, int sig);
 
 // We don't expect applications to use the Linux futex() system call (it is
 // normally only used to implement higher-level synchronization mechanisms),
@@ -190,6 +191,17 @@ long long_mmap(void *addr, size_t length, int prot, int flags, int fd, off_t off
         arg1 = va_arg(args, __t1);          \
         va_end(args);                       \
         return fn(arg1);                    \
+        } while (0)
+
+#define VOID_SYSCALL1(fn, __t1)                  \
+        case (__NR_##fn): do {              \
+        va_list args;                       \
+        __t1 arg1;                          \
+        va_start(args, number);             \
+        arg1 = va_arg(args, __t1);          \
+        va_end(args);                       \
+        fn(arg1);                           \
+        return 0;                           \
         } while (0)
 
 #define SYSCALL2(fn, __t1, __t2)            \
@@ -347,6 +359,7 @@ long syscall(long number, ...)
     SYSCALL3(mincore, void *, size_t, unsigned char *);
     SYSCALL3(dup3, int, int, int);
     SYSCALL2(tkill, int, int);
+    VOID_SYSCALL1(exit_group, int);
     }
 
     debug_always("syscall(): unimplemented system call %d\n", number);
