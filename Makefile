@@ -1710,6 +1710,7 @@ libc += malloc_hooks.o
 libc += mallopt.o
 
 libc += linux/makedev.o
+libc += linux/tkill.o
 
 ifneq ($(musl_arch), notsup)
 musl += fenv/fegetexceptflag.o

@@ -38,6 +38,8 @@ extern "C" long gettid()
     return sched::thread::current()->id();
 }
 
+extern int tkill (int tid, int sig);
+
 // We don't expect applications to use the Linux futex() system call (it is
 // normally only used to implement higher-level synchronization mechanisms),
 // but unfortunately gcc's C++ runtime uses a subset of futex in the
@@ -344,6 +346,7 @@ long syscall(long number, ...)
     SYSCALL0(sched_yield);
     SYSCALL3(mincore, void *, size_t, unsigned char *);
     SYSCALL3(dup3, int, int, int);
+    SYSCALL2(tkill, int, int);
     }
 
     debug_always("syscall(): unimplemented system call %d\n", number);
