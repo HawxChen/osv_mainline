@@ -18,6 +18,8 @@
 #include <boost/range/algorithm/transform.hpp>
 #include <osv/wait_record.hh>
 #include "libc/pthread.hh"
+#define __APP_SOL__
+
 
 using namespace boost::range;
 
@@ -178,10 +180,22 @@ application::application(const std::string& command,
         throw launch_error("Failed to load object: " + command);
     }
 
+
     _main = _lib->lookup<int (int, char**)>("main");
+#ifdef __APP_SOL__
+    if (!_main) {
+        _entry_point = _lib->lookup<void ()>("GoMain");
+    }
+
+    if (!_entry_point && !_main) {
+        _entry_point = reinterpret_cast<void(*)()>(_lib->entry_point());
+    }
+#else
     if (!_main) {
         _entry_point = reinterpret_cast<void(*)()>(_lib->entry_point());
     }
+#endif
+
     if (!_entry_point && !_main) {
         throw launch_error("Failed looking up main");
     }
