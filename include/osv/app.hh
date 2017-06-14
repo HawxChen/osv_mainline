@@ -20,6 +20,9 @@
 #include <unordered_map>
 #include <string>
 
+#include "musl/include/elf.h"
+#undef AT_UID // prevent collisions
+#undef AT_GID
 extern "C" void __libc_start_main(int(*)(int, char**), int, char**, void(*)(),
     void(*)(), void(*)(), void*);
 
@@ -197,6 +200,7 @@ private:
     void start_and_join(waiter* setup_waiter);
     void main();
     void run_main(std::string path, int argc, char** argv);
+    void prepare_argv(elf::program *program);
     void run_main();
     friend void ::__libc_start_main(int(*)(int, char**), int, char**, void(*)(),
         void(*)(), void(*)(), void*);
@@ -218,6 +222,8 @@ private:
     void (*_entry_point)();
     static app_registry apps;
 
+    std::unique_ptr<char *[]> _argv; // uniqueptr to argv
+    std::unique_ptr<char []> _argv_buf; // actual arguments content
     // Must be destroyed before _lib, because contained function objects may
     // have destructors which are part of the application's code.
     std::list<std::function<void()>> _termination_request_callbacks;

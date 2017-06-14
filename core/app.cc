@@ -177,7 +177,11 @@ application::application(const std::string& command,
         }
 
         merge_in_environ(new_program, env);
+	prepare_argv(current_program);
+        _lib = current_program->get_library(_command, {}, true);
+#if 0
         _lib = current_program->get_library(_command);
+#endif
     } catch(const std::exception &e) {
         throw launch_error(e.what());
     }
@@ -300,6 +304,7 @@ void application::main()
     debug_always("application::main by id:%u\n", sched::thread::current()->id());
     __libc_stack_end = __builtin_frame_address(0);
 
+    elf::get_program()->init_library(_args.size(), _argv.get());
     sched::thread::current()->set_name(_command);
 
     if (_main) {
@@ -321,6 +326,69 @@ void application::main()
     }
 
     // _entry_point() doesn't return
+}
+
+void application::prepare_argv(elf::program *program)
+{
+    // Prepare program_* variable used by the libc
+    char *c_path = (char *)(_command.c_str());
+    program_invocation_name = c_path;
+    program_invocation_short_name = basename(c_path);
+
+    // Allocate a continuous buffer for arguments: _argv_buf
+    // First count the trailing zeroes
+    auto sz = _args.size();
+    // Then add the sum of each argument size to sz
+    for (auto &str: _args) {
+        sz += str.size();
+    }
+    _argv_buf.reset(new char[sz]);
+
+    // In Linux, the pointer arrays argv[] and envp[] are continguous.
+    // Unfortunately, some programs rely on this fact (e.g., libgo's
+    // runtime_goenvs_unix()) so it is useful that we do this too.
+
+    // First count the number of environment variables
+    int envcount = 0;
+    while (environ[envcount]) {
+        envcount++;
+    }
+
+    // Allocate the continuous buffer for argv[] and envp[]
+    _argv.reset(new char*[_args.size() + 1 + envcount + 1 + sizeof(Elf64_auxv_t) * 2]);
+
+    // Fill the argv part of these buffers
+    char *ab = _argv_buf.get();
+    char **contig_argv = _argv.get();
+    for (size_t i = 0; i < _args.size(); i++) {
+	auto &str = _args[i];
+        memcpy(ab, str.c_str(), str.size());
+        ab[str.size()] = '\0';
+        contig_argv[i] = ab;
+        ab += str.size() + 1;
+    }
+    contig_argv[_args.size()] = nullptr;
+
+    // Do the same for environ
+    for (int i = 0; i < envcount; i++) {
+        contig_argv[_args.size() + 1 + i] = environ[i];
+    }
+    contig_argv[_args.size() + 1 + envcount] = nullptr;
+
+    _libvdso = program->get_library("libvdso.so");
+    if (!_libvdso) {
+        abort("could not load libvdso.so\n");
+        return;
+    }
+
+    // Pass the VDSO library to the application.
+    Elf64_auxv_t* _auxv =
+        reinterpret_cast<Elf64_auxv_t *>(&contig_argv[_args.size() + 1 + envcount + 1]);
+    _auxv[0].a_type = AT_SYSINFO_EHDR;
+    _auxv[0].a_un.a_val = reinterpret_cast<uint64_t>(_libvdso->base());
+
+    _auxv[1].a_type = AT_NULL;
+    _auxv[1].a_un.a_val = 0;
 }
 
 void application::run_main(std::string path, int argc, char** argv)
@@ -374,6 +442,7 @@ void application::run_main()
     debug_always("application::run_main @void\n");
     trace_app_main(this, _command.c_str());
 
+#if 0
     // C main wants mutable arguments, so we have can't use strings directly
     std::vector<std::vector<char>> mut_args;
     transform(_args, back_inserter(mut_args),
@@ -384,6 +453,12 @@ void application::run_main()
     auto argc = argv.size();
     argv.push_back(nullptr);
     run_main(_command, argc, argv.data());
+#endif
+
+    int old_optind = optind;
+    optind = 0;
+    _return_code = _main(_args.size(), _argv.get());
+    optind = old_optind;
 
     if (_return_code) {
         debug("program %s returned %d\n", _command.c_str(), _return_code);
