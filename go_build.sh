@@ -1,2 +1,3 @@
 #!/bin/sh
-scripts/build mode=debug image=golang-example -j8
+pkill qemu
+make mode=debug -j8 && scripts/build mode=debug image=golang-example -j8

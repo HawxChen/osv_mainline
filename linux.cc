@@ -330,7 +330,7 @@ long syscall(long number, ...)
     sched::fpu_lock fpu;
     SCOPE_LOCK(fpu);
 
-    debug_always("syscall(): system call %d called\n", number);
+    debug_always("syscall(): system call %d called by tid:%u\n", number, sched::thread::current()->id());
     switch (number) {
     SYSCALL2(open, const char *, int);
     SYSCALL3(read, int, char *, size_t);

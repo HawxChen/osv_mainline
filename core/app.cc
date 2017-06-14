@@ -18,6 +18,7 @@
 #include <boost/range/algorithm/transform.hpp>
 #include <osv/wait_record.hh>
 #include "libc/pthread.hh"
+#include<osv/stubbing.hh>
 #define __APP_SOL__
 
 
@@ -32,6 +33,7 @@ void *__libc_stack_end;
 extern "C" void __libc_start_main(int (*main)(int, char**), int, char**,
     void(*)(), void(*)(), void(*)(), void*)
 {
+    debug_always("libc_start_main\n");
     auto app = osv::application::get_current();
     assert(app->_entry_point);
     app->_main = main;
@@ -102,6 +104,7 @@ shared_app_t application::get_current()
 
 bool application::unsafe_stop_and_abandon_other_threads()
 {
+    debug_always("application::unsafe_stop_and_abandon_other_threads\n");
     auto current = sched::thread::current();
     auto current_runtime = current->app_runtime();
     bool success = true;
@@ -121,6 +124,7 @@ bool application::unsafe_stop_and_abandon_other_threads()
 
 shared_app_t application::run(const std::vector<std::string>& args)
 {
+    debug_always("application:: run @args\n");
     return run(args[0], args);
 }
 
@@ -129,6 +133,7 @@ shared_app_t application::run(const std::string& command,
                       bool new_program,
                       const std::unordered_map<std::string, std::string> *env)
 {
+    debug_always("application:: run @new program\n");
     auto app = std::make_shared<application>(command, args, new_program, env);
     app->start();
     apps.push(app);
@@ -157,6 +162,7 @@ application::application(const std::string& command,
     , _joiner(nullptr)
     , _terminated(false)
 {
+    debug_always("application::application\n");
     try {
         elf::program *current_program;
 
@@ -185,9 +191,12 @@ application::application(const std::string& command,
 #ifdef __APP_SOL__
     if (!_main) {
         _entry_point = _lib->lookup<void ()>("GoMain");
+        debug_always("Get GoMain:%p\n", _entry_point);
+
     }
 
     if (!_entry_point && !_main) {
+        debug_always("Did not Get GoMain\n");
         _entry_point = reinterpret_cast<void(*)()>(_lib->entry_point());
     }
 #else
@@ -206,6 +215,7 @@ void application::start()
     // FIXME: we cannot create the thread inside the constructor because
     // the thread would attempt to call shared_from_this() before object
     // is constructed which is illegal.
+    debug_always("application::start\n");
     override_current_app = this;
     auto err = pthread_create(&_thread, NULL, [](void *app) -> void* {
         ((application*)app)->main();
@@ -215,6 +225,7 @@ void application::start()
     if (err) {
         throw launch_error("Failed to create the main thread, err=" + std::to_string(err));
     }
+    debug_always("application::start finished safely\n");
 }
 
 TRACEPOINT(trace_app_destroy, "app=%p", application*);
@@ -250,6 +261,7 @@ int application::join()
 
 void application::start_and_join(waiter* setup_waiter)
 {
+    debug_always("application::start_and_join\n");
     // We start the new application code in the current thread. We temporarily
     // change the app_runtime pointer of this thread, while keeping the old
     // pointer saved and restoring it when the new application ends (keeping
@@ -285,11 +297,13 @@ TRACEPOINT(trace_app_main_ret, "return_code=%d", int);
 
 void application::main()
 {
+    debug_always("application::main by id:%u\n", sched::thread::current()->id());
     __libc_stack_end = __builtin_frame_address(0);
 
     sched::thread::current()->set_name(_command);
 
     if (_main) {
+        debug_always("application::main ---> run_main() by id:%u\n", sched::thread::current()->id());
         run_main();
     } else {
         // The application is expected not to initialize the environment in
@@ -298,6 +312,11 @@ void application::main()
         // may be called twice, TLS may be overriden and the program may not
         // received correct arguments, environment variables and auxiliary
         // vector.
+        debug_always("application::main ---> _entry_point:%p tid:%u\n", _entry_point, sched::thread::current()->id());
+        //auto runtime = sched::thread::current()->app_runtime();
+
+        // _lib->lookup<void ()>("GoMain")();
+
         _entry_point();
     }
 
@@ -306,6 +325,7 @@ void application::main()
 
 void application::run_main(std::string path, int argc, char** argv)
 {
+    debug_always("application::run_main @argc,argv\n");
     char *c_path = (char *)(path.c_str());
     // path is guaranteed to keep existing this function
     program_invocation_name = c_path;
@@ -351,6 +371,7 @@ void application::run_main(std::string path, int argc, char** argv)
 
 void application::run_main()
 {
+    debug_always("application::run_main @void\n");
     trace_app_main(this, _command.c_str());
 
     // C main wants mutable arguments, so we have can't use strings directly
@@ -441,6 +462,7 @@ std::bitset<max_namespaces> namespaces(1);
 
 void application::new_program()
 {
+    debug_always("application::new_program\n");
     for (unsigned long i = 0; i < max_namespaces; ++i) {
         if (!namespaces.test(i)) {
             namespaces.set(i);
@@ -459,12 +481,14 @@ void application::new_program()
 }
 
 elf::program *application::program() {
+    debug_always("elf::program *application::program\n");
     return _program.get();
 }
 
 
 void application::clone_osv_environ()
 {
+    debug_always("application:: clone_osv_environ\n");
     _libenviron = _program->get_library("libenviron.so");
     if (!_libenviron) {
         abort("could not load libenviron.so\n");
@@ -488,6 +512,7 @@ void application::set_environ(const std::string &key, const std::string &value,
                               bool new_program)
 {
     // create a pointer to OSv's libc setenv()
+    debug_always("application:: setenviron\n");
     auto my_setenv = setenv;
 
     if (new_program) {
