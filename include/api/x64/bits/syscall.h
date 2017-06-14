@@ -313,6 +313,8 @@
 #define __NR_kcmp				312
 #define __NR_finit_module			313
 
+#define __NR_getrandom                           318
+
 #undef __NR_fstatat
 #undef __NR_pread
 #undef __NR_pwrite
@@ -641,6 +643,8 @@
 #define SYS_process_vm_writev			311
 #define SYS_kcmp				312
 #define SYS_finit_module			313
+
+#define SYS_getrandom                           318
 
 #undef SYS_fstatat
 #undef SYS_pread

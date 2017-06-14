@@ -1324,6 +1324,7 @@ libc += misc/lockf.o
 libc += misc/mntent.o
 musl += misc/nftw.o
 libc += misc/__longjmp_chk.o
+libc += misc/getrandom.o
 
 musl += multibyte/btowc.o
 musl += multibyte/internal.o

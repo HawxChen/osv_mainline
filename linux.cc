@@ -35,7 +35,7 @@
 #include <sys/stat.h>
 #include <fcntl.h>
 #include <sys/ioctl.h>
-//#include <linux/random.h>
+#include <linux/random.h>
 
 #include <unordered_map>
 
@@ -381,7 +381,7 @@ long syscall(long number, ...)
     SYSCALL3(bind, int, struct sockaddr *, int);
     SYSCALL2(listen, int, int);
     SYSCALL3(sys_ioctl, unsigned int, unsigned int, unsigned long);
-    //SYSCALL3(getrandom, char *, size_t, unsigned int);
+    SYSCALL3(getrandom, char *, size_t, unsigned int);
     SYSCALL2(stat, const char *, struct stat *);
     SYSCALL3(getsockname, int, struct sockaddr *, socklen_t *);
     }
