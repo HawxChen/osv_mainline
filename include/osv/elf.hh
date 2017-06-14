@@ -15,6 +15,7 @@
 #include <unordered_set>
 #include <osv/types.h>
 #include <atomic>
+#include <stack>
 
 #include "arch-elf.hh"
 
@@ -334,7 +335,8 @@ public:
     const std::vector<Elf64_Phdr> *phdrs();
     std::string soname();
     std::string pathname();
-    void run_init_funcs();
+//    void run_init_funcs();
+    void run_init_funcs(int argc, char** argv);
     void run_fini_funcs();
     template <typename T = void>
     T* lookup(const char* name);
@@ -525,7 +527,10 @@ public:
      *                        set_search_path().
      */
     std::shared_ptr<elf::object>
-    get_library(std::string lib, std::vector<std::string> extra_path = {});
+    //get_library(std::string lib, std::vector<std::string> extra_path = {});
+    get_library(std::string lib, std::vector<std::string> extra_path = {}, bool no_init = false);
+
+    void init_library(int argc = 0, char **argv = nullptr);
 
     /**
      * Set the default search path for get_library().
@@ -596,6 +601,7 @@ private:
 
     friend elf::file::~file();
     friend class object;
+    std::stack<std::vector<std::shared_ptr<object>>> _loaded_objects_stack;
 };
 
 void create_main_program();
