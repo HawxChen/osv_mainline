@@ -1,4 +1,5 @@
 [manifest]
+/libvdso.so: libvdso.so
 /libenviron.so: libenviron.so
 /tools/mount-nfs.so: tools/mount/mount-nfs.so
 /tools/umount.so: tools/mount/umount.so
