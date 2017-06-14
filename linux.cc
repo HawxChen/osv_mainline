@@ -30,6 +30,12 @@
 #include <sys/mman.h>
 #include <osv/tkill.h>
 #include <osv/exit_group.h>
+#include <sys/types.h>
+#include <sys/socket.h>
+#include <sys/stat.h>
+#include <fcntl.h>
+#include <sys/ioctl.h>
+//#include <linux/random.h>
 
 #include <unordered_map>
 
@@ -323,6 +329,12 @@ static int sys_exit(int ret)
     exit(ret);
     return 0;
 }
+#define __NR_sys_ioctl __NR_ioctl
+
+static int sys_ioctl(unsigned int fd, unsigned int command, unsigned long arg)
+{
+    return ioctl(fd, command, arg);
+}
 
 long syscall(long number, ...)
 {
@@ -347,6 +359,7 @@ long syscall(long number, ...)
     SYSCALL4(epoll_ctl, int, int, int, struct epoll_event *);
     SYSCALL4(epoll_wait, int, struct epoll_event *, int, int);
     SYSCALL4(accept4, int, struct sockaddr *, socklen_t *, int);
+    SYSCALL3(connect, int, struct sockaddr *, socklen_t);
     SYSCALL5(get_mempolicy, int *, unsigned long *, unsigned long, void *, int);
     SYSCALL3(sched_getaffinity_syscall, pid_t, unsigned, unsigned long *);
     SYSCALL6(long_mmap, void *, size_t, int, int, int, off_t);
@@ -362,6 +375,15 @@ long syscall(long number, ...)
     SYSCALL3(dup3, int, int, int);
     SYSCALL2(tkill, int, int);
     VOID_SYSCALL1(exit_group, int);
+    SYSCALL4(openat, int, const char *, int, mode_t);
+    SYSCALL3(socket, int, int, int);
+    SYSCALL5(setsockopt, int, int, int, char *, int);
+    SYSCALL3(bind, int, struct sockaddr *, int);
+    SYSCALL2(listen, int, int);
+    SYSCALL3(sys_ioctl, unsigned int, unsigned int, unsigned long);
+    //SYSCALL3(getrandom, char *, size_t, unsigned int);
+    SYSCALL2(stat, const char *, struct stat *);
+    SYSCALL3(getsockname, int, struct sockaddr *, socklen_t *);
     }
 
     debug_always("syscall(): unimplemented system call %d\n", number);
