@@ -10,6 +10,7 @@
 
 #include "msr.hh"
 #include <osv/barrier.hh>
+#include<osv/stubbing.hh>
 #include <string.h>
 
 extern "C" {
@@ -109,6 +110,7 @@ void thread::init_stack()
         stack.begin = malloc(stack.size);
         stack.deleter = stack.default_deleter;
     }
+    debug_always("thread::init_stack, allocated size: %d B\n", stack.size);
     void** stacktop = reinterpret_cast<void**>(stack.begin + stack.size);
     _state.rbp = this;
     _state.rip = reinterpret_cast<void*>(thread_main);
