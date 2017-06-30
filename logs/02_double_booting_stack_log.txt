@@ -1,0 +1,227 @@
+OSv v0.24-376-gbf583f4
+thread::init_stack, allocated size: 4096 B
+thread::init_stack, allocated size: 65536 B
+thread::init_stack, allocated size: 65536 B
+thread::init_stack, allocated size: 65536 B
+thread::init_stack, allocated size: 65536 B
+thread::init_stack, allocated size: 40960 B
+thread::init_stack, allocated size: 65536 B
+thread::init_stack, allocated size: 65536 B
+thread::init_stack, allocated size: 65536 B
+thread::init_stack, allocated size: 65536 B
+thread::init_stack, allocated size: 65536 B
+thread::init_stack, allocated size: 65536 B
+thread::init_stack, allocated size: 65536 B
+thread::init_stack, allocated size: 65536 B
+thread::init_stack, allocated size: 16384 B
+thread::init_stack, allocated size: 65536 B
+thread::init_stack, allocated size: 16384 B
+thread::init_stack, allocated size: 16384 B
+thread::init_stack, allocated size: 16384 B
+thread::init_stack, allocated size: 16384 B
+thread::init_stack, allocated size: 16384 B
+thread::init_stack, allocated size: 16384 B
+thread::init_stack, allocated size: 16384 B
+thread::init_stack, allocated size: 16384 B
+thread::init_stack, allocated size: 16384 B
+thread::init_stack, allocated size: 16384 B
+thread::init_stack, allocated size: 65536 B
+thread::init_stack, allocated size: 1048576 B
+thread::init_stack, allocated size: 65536 B
+thread::init_stack, allocated size: 65536 B
+thread::init_stack, allocated size: 65536 B
+thread::init_stack, allocated size: 65536 B
+thread::init_stack, allocated size: 65536 B
+thread::init_stack, allocated size: 65536 B
+thread::init_stack, allocated size: 16384 B
+thread::init_stack, allocated size: 16384 B
+thread::init_stack, allocated size: 16384 B
+thread::init_stack, allocated size: 16384 B
+thread::init_stack, allocated size: 16384 B
+thread::init_stack, allocated size: 16384 B
+thread::init_stack, allocated size: 16384 B
+thread::init_stack, allocated size: 16384 B
+thread::init_stack, allocated size: 16384 B
+thread::init_stack, allocated size: 16384 B
+thread::init_stack, allocated size: 16384 B
+thread::init_stack, allocated size: 16384 B
+thread::init_stack, allocated size: 16384 B
+thread::init_stack, allocated size: 16384 B
+thread::init_stack, allocated size: 16384 B
+thread::init_stack, allocated size: 16384 B
+thread::init_stack, allocated size: 16384 B
+thread::init_stack, allocated size: 16384 B
+thread::init_stack, allocated size: 16384 B
+thread::init_stack, allocated size: 16384 B
+thread::init_stack, allocated size: 16384 B
+thread::init_stack, allocated size: 16384 B
+thread::init_stack, allocated size: 16384 B
+thread::init_stack, allocated size: 16384 B
+thread::init_stack, allocated size: 16384 B
+thread::init_stack, allocated size: 16384 B
+thread::init_stack, allocated size: 16384 B
+thread::init_stack, allocated size: 16384 B
+thread::init_stack, allocated size: 16384 B
+thread::init_stack, allocated size: 16384 B
+thread::init_stack, allocated size: 16384 B
+thread::init_stack, allocated size: 16384 B
+thread::init_stack, allocated size: 16384 B
+thread::init_stack, allocated size: 16384 B
+thread::init_stack, allocated size: 16384 B
+thread::init_stack, allocated size: 16384 B
+thread::init_stack, allocated size: 16384 B
+thread::init_stack, allocated size: 16384 B
+thread::init_stack, allocated size: 16384 B
+thread::init_stack, allocated size: 16384 B
+thread::init_stack, allocated size: 16384 B
+thread::init_stack, allocated size: 16384 B
+thread::init_stack, allocated size: 16384 B
+thread::init_stack, allocated size: 16384 B
+thread::init_stack, allocated size: 16384 B
+thread::init_stack, allocated size: 16384 B
+thread::init_stack, allocated size: 16384 B
+thread::init_stack, allocated size: 16384 B
+thread::init_stack, allocated size: 16384 B
+thread::init_stack, allocated size: 16384 B
+thread::init_stack, allocated size: 16384 B
+thread::init_stack, allocated size: 16384 B
+thread::init_stack, allocated size: 16384 B
+thread::init_stack, allocated size: 16384 B
+thread::init_stack, allocated size: 16384 B
+thread::init_stack, allocated size: 16384 B
+thread::init_stack, allocated size: 16384 B
+thread::init_stack, allocated size: 16384 B
+thread::init_stack, allocated size: 16384 B
+thread::init_stack, allocated size: 16384 B
+thread::init_stack, allocated size: 16384 B
+thread::init_stack, allocated size: 16384 B
+thread::init_stack, allocated size: 16384 B
+thread::init_stack, allocated size: 16384 B
+thread::init_stack, allocated size: 16384 B
+thread::init_stack, allocated size: 16384 B
+thread::init_stack, allocated size: 16384 B
+thread::init_stack, allocated size: 16384 B
+thread::init_stack, allocated size: 16384 B
+thread::init_stack, allocated size: 16384 B
+thread::init_stack, allocated size: 16384 B
+thread::init_stack, allocated size: 16384 B
+thread::init_stack, allocated size: 16384 B
+thread::init_stack, allocated size: 16384 B
+thread::init_stack, allocated size: 16384 B
+thread::init_stack, allocated size: 16384 B
+thread::init_stack, allocated size: 16384 B
+thread::init_stack, allocated size: 16384 B
+thread::init_stack, allocated size: 16384 B
+thread::init_stack, allocated size: 16384 B
+thread::init_stack, allocated size: 16384 B
+thread::init_stack, allocated size: 16384 B
+thread::init_stack, allocated size: 16384 B
+thread::init_stack, allocated size: 16384 B
+thread::init_stack, allocated size: 16384 B
+thread::init_stack, allocated size: 16384 B
+thread::init_stack, allocated size: 16384 B
+thread::init_stack, allocated size: 16384 B
+thread::init_stack, allocated size: 16384 B
+thread::init_stack, allocated size: 16384 B
+thread::init_stack, allocated size: 16384 B
+thread::init_stack, allocated size: 16384 B
+thread::init_stack, allocated size: 16384 B
+thread::init_stack, allocated size: 16384 B
+thread::init_stack, allocated size: 16384 B
+thread::init_stack, allocated size: 16384 B
+thread::init_stack, allocated size: 16384 B
+thread::init_stack, allocated size: 16384 B
+thread::init_stack, allocated size: 16384 B
+thread::init_stack, allocated size: 16384 B
+thread::init_stack, allocated size: 16384 B
+thread::init_stack, allocated size: 16384 B
+thread::init_stack, allocated size: 16384 B
+thread::init_stack, allocated size: 16384 B
+thread::init_stack, allocated size: 16384 B
+thread::init_stack, allocated size: 16384 B
+thread::init_stack, allocated size: 16384 B
+thread::init_stack, allocated size: 16384 B
+thread::init_stack, allocated size: 16384 B
+thread::init_stack, allocated size: 16384 B
+thread::init_stack, allocated size: 16384 B
+thread::init_stack, allocated size: 16384 B
+thread::init_stack, allocated size: 16384 B
+thread::init_stack, allocated size: 16384 B
+thread::init_stack, allocated size: 16384 B
+thread::init_stack, allocated size: 16384 B
+thread::init_stack, allocated size: 16384 B
+thread::init_stack, allocated size: 16384 B
+thread::init_stack, allocated size: 16384 B
+thread::init_stack, allocated size: 16384 B
+thread::init_stack, allocated size: 16384 B
+thread::init_stack, allocated size: 16384 B
+thread::init_stack, allocated size: 16384 B
+thread::init_stack, allocated size: 16384 B
+thread::init_stack, allocated size: 16384 B
+thread::init_stack, allocated size: 16384 B
+thread::init_stack, allocated size: 16384 B
+thread::init_stack, allocated size: 16384 B
+thread::init_stack, allocated size: 16384 B
+thread::init_stack, allocated size: 16384 B
+thread::init_stack, allocated size: 16384 B
+thread::init_stack, allocated size: 16384 B
+thread::init_stack, allocated size: 16384 B
+thread::init_stack, allocated size: 16384 B
+thread::init_stack, allocated size: 16384 B
+thread::init_stack, allocated size: 16384 B
+thread::init_stack, allocated size: 16384 B
+thread::init_stack, allocated size: 16384 B
+thread::init_stack, allocated size: 16384 B
+thread::init_stack, allocated size: 16384 B
+thread::init_stack, allocated size: 16384 B
+thread::init_stack, allocated size: 16384 B
+thread::init_stack, allocated size: 16384 B
+thread::init_stack, allocated size: 16384 B
+thread::init_stack, allocated size: 16384 B
+thread::init_stack, allocated size: 16384 B
+thread::init_stack, allocated size: 16384 B
+thread::init_stack, allocated size: 16384 B
+thread::init_stack, allocated size: 16384 B
+thread::init_stack, allocated size: 16384 B
+thread::init_stack, allocated size: 16384 B
+thread::init_stack, allocated size: 16384 B
+thread::init_stack, allocated size: 16384 B
+thread::init_stack, allocated size: 16384 B
+thread::init_stack, allocated size: 16384 B
+thread::init_stack, allocated size: 16384 B
+application::application
+application::start_and_join
+application::main by id:27
+elf::program *application::program
+application::main ---> run_main() by id:27
+application::run_main @void
+thread::init_stack, allocated size: 65536 B
+thread::init_stack, allocated size: 65536 B
+thread::init_stack, allocated size: 65536 B
+thread::init_stack, allocated size: 65536 B
+thread::init_stack, allocated size: 65536 B
+thread::init_stack, allocated size: 65536 B
+thread::init_stack, allocated size: 65536 B
+thread::init_stack, allocated size: 65536 B
+thread::init_stack, allocated size: 65536 B
+eth0: 192.168.122.15
+application:: run @args
+application:: run @new program
+application::application
+Get GoMain:1
+application::start
+thread::init_stack, allocated size: 1048576 B
+application::main by id:199
+elf::program *application::program
+thread::init_stack, allocated size: 1048576 B
+application::main ---> _entry_point:1 tid:199
+gettid: currnet thread id is 200
+thread::init_stack, allocated size: 1048576 B
+thread::init_stack, allocated size: 1048576 B
+gettid: currnet thread id is 201
+gettid: currnet thread id is 202
+gettid: currnet thread id is 199
+Hello, 世界
+
+Go version: go1.6.2
+application::start finished safely
