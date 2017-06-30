@@ -107,10 +107,15 @@ void thread::init_stack()
         stack.size = 65536;
     }
     if (!stack.begin) {
+        stack.size = stack.size * 2;
         stack.begin = malloc(stack.size);
         stack.deleter = stack.default_deleter;
+        if(_id != 0)
+            debug_always("thread-%d stack is being mapped,  allocated size: %d B @init_stack\n", _id,stack.size);
+    } else {
+        if(_id != 0)
+            debug_always("thread-%d's stack was mapped, allocated size: %d B  @init_stack\n", _id,stack.size);
     }
-    debug_always("thread::init_stack, allocated size: %d B\n", stack.size);
     void** stacktop = reinterpret_cast<void**>(stack.begin + stack.size);
     _state.rbp = this;
     _state.rip = reinterpret_cast<void*>(thread_main);

@@ -1,0 +1,410 @@
+OSv v0.24-378-g362e23d
+thread-1 stack is being mapped,  allocated size: 8192 B @init_stack
+thread-2 stack is being mapped,  allocated size: 131072 B @init_stack
+thread-3 stack is being mapped,  allocated size: 131072 B @init_stack
+thread-4 stack is being mapped,  allocated size: 131072 B @init_stack
+thread-5 stack is being mapped,  allocated size: 131072 B @init_stack
+thread-6 stack is being mapped,  allocated size: 131072 B @init_stack
+thread-7 stack is being mapped,  allocated size: 131072 B @init_stack
+thread-8 stack is being mapped,  allocated size: 131072 B @init_stack
+thread-9 stack is being mapped,  allocated size: 131072 B @init_stack
+thread-10 stack is being mapped,  allocated size: 131072 B @init_stack
+thread-11 stack is being mapped,  allocated size: 131072 B @init_stack
+thread-12 stack is being mapped,  allocated size: 131072 B @init_stack
+thread-13 stack is being mapped,  allocated size: 131072 B @init_stack
+thread-14 stack is being mapped,  allocated size: 32768 B @init_stack
+thread-15 stack is being mapped,  allocated size: 131072 B @init_stack
+thread-16 stack is being mapped,  allocated size: 32768 B @init_stack
+thread-17 stack is being mapped,  allocated size: 32768 B @init_stack
+thread-18 stack is being mapped,  allocated size: 32768 B @init_stack
+thread-19 stack is being mapped,  allocated size: 32768 B @init_stack
+thread-20 stack is being mapped,  allocated size: 32768 B @init_stack
+thread-21 stack is being mapped,  allocated size: 32768 B @init_stack
+thread-22 stack is being mapped,  allocated size: 32768 B @init_stack
+thread-23 stack is being mapped,  allocated size: 32768 B @init_stack
+thread-24 stack is being mapped,  allocated size: 32768 B @init_stack
+thread-25 stack is being mapped,  allocated size: 32768 B @init_stack
+thread-26 stack is being mapped,  allocated size: 131072 B @init_stack
+thread-0 is mapping the child's stack , size: 4194304 B @allocate_stack
+thread-27's stack was mapped, allocated size: 4194304 B  @init_stack
+thread-0 created thread-27
+thread-28 stack is being mapped,  allocated size: 131072 B @init_stack
+thread-29 stack is being mapped,  allocated size: 131072 B @init_stack
+thread-30 stack is being mapped,  allocated size: 131072 B @init_stack
+thread-31 stack is being mapped,  allocated size: 131072 B @init_stack
+thread-32 stack is being mapped,  allocated size: 131072 B @init_stack
+thread-33 stack is being mapped,  allocated size: 131072 B @init_stack
+thread-34 stack is being mapped,  allocated size: 32768 B @init_stack
+thread-35 stack is being mapped,  allocated size: 32768 B @init_stack
+thread-36 stack is being mapped,  allocated size: 32768 B @init_stack
+thread-37 stack is being mapped,  allocated size: 32768 B @init_stack
+thread-38 stack is being mapped,  allocated size: 32768 B @init_stack
+thread-39 stack is being mapped,  allocated size: 32768 B @init_stack
+thread-40 stack is being mapped,  allocated size: 32768 B @init_stack
+thread-41 stack is being mapped,  allocated size: 32768 B @init_stack
+thread-42 stack is being mapped,  allocated size: 32768 B @init_stack
+thread-43 stack is being mapped,  allocated size: 32768 B @init_stack
+thread-44 stack is being mapped,  allocated size: 32768 B @init_stack
+thread-45 stack is being mapped,  allocated size: 32768 B @init_stack
+thread-46 stack is being mapped,  allocated size: 32768 B @init_stack
+thread-47 stack is being mapped,  allocated size: 32768 B @init_stack
+thread-48 stack is being mapped,  allocated size: 32768 B @init_stack
+thread-49 stack is being mapped,  allocated size: 32768 B @init_stack
+thread-50 stack is being mapped,  allocated size: 32768 B @init_stack
+thread-51 stack is being mapped,  allocated size: 32768 B @init_stack
+thread-52 stack is being mapped,  allocated size: 32768 B @init_stack
+thread-53 stack is being mapped,  allocated size: 32768 B @init_stack
+thread-54 stack is being mapped,  allocated size: 32768 B @init_stack
+thread-55 stack is being mapped,  allocated size: 32768 B @init_stack
+thread-56 stack is being mapped,  allocated size: 32768 B @init_stack
+thread-57 stack is being mapped,  allocated size: 32768 B @init_stack
+thread-58 stack is being mapped,  allocated size: 32768 B @init_stack
+thread-59 stack is being mapped,  allocated size: 32768 B @init_stack
+thread-60 stack is being mapped,  allocated size: 32768 B @init_stack
+thread-61 stack is being mapped,  allocated size: 32768 B @init_stack
+thread-62 stack is being mapped,  allocated size: 32768 B @init_stack
+thread-63 stack is being mapped,  allocated size: 32768 B @init_stack
+thread-64 stack is being mapped,  allocated size: 32768 B @init_stack
+thread-65 stack is being mapped,  allocated size: 32768 B @init_stack
+thread-66 stack is being mapped,  allocated size: 32768 B @init_stack
+thread-67 stack is being mapped,  allocated size: 32768 B @init_stack
+thread-68 stack is being mapped,  allocated size: 32768 B @init_stack
+thread-69 stack is being mapped,  allocated size: 32768 B @init_stack
+thread-70 stack is being mapped,  allocated size: 32768 B @init_stack
+thread-71 stack is being mapped,  allocated size: 32768 B @init_stack
+thread-72 stack is being mapped,  allocated size: 32768 B @init_stack
+thread-73 stack is being mapped,  allocated size: 32768 B @init_stack
+thread-74 stack is being mapped,  allocated size: 32768 B @init_stack
+thread-75 stack is being mapped,  allocated size: 32768 B @init_stack
+thread-76 stack is being mapped,  allocated size: 32768 B @init_stack
+thread-77 stack is being mapped,  allocated size: 32768 B @init_stack
+thread-78 stack is being mapped,  allocated size: 32768 B @init_stack
+thread-79 stack is being mapped,  allocated size: 32768 B @init_stack
+thread-80 stack is being mapped,  allocated size: 32768 B @init_stack
+thread-81 stack is being mapped,  allocated size: 32768 B @init_stack
+thread-82 stack is being mapped,  allocated size: 32768 B @init_stack
+thread-83 stack is being mapped,  allocated size: 32768 B @init_stack
+thread-84 stack is being mapped,  allocated size: 32768 B @init_stack
+thread-85 stack is being mapped,  allocated size: 32768 B @init_stack
+thread-86 stack is being mapped,  allocated size: 32768 B @init_stack
+thread-87 stack is being mapped,  allocated size: 32768 B @init_stack
+thread-88 stack is being mapped,  allocated size: 32768 B @init_stack
+thread-89 stack is being mapped,  allocated size: 32768 B @init_stack
+thread-90 stack is being mapped,  allocated size: 32768 B @init_stack
+thread-91 stack is being mapped,  allocated size: 32768 B @init_stack
+thread-92 stack is being mapped,  allocated size: 32768 B @init_stack
+thread-93 stack is being mapped,  allocated size: 32768 B @init_stack
+thread-94 stack is being mapped,  allocated size: 32768 B @init_stack
+thread-95 stack is being mapped,  allocated size: 32768 B @init_stack
+thread-96 stack is being mapped,  allocated size: 32768 B @init_stack
+thread-97 stack is being mapped,  allocated size: 32768 B @init_stack
+thread-98 stack is being mapped,  allocated size: 32768 B @init_stack
+thread-99 stack is being mapped,  allocated size: 32768 B @init_stack
+thread-100 stack is being mapped,  allocated size: 32768 B @init_stack
+thread-101 stack is being mapped,  allocated size: 32768 B @init_stack
+thread-102 stack is being mapped,  allocated size: 32768 B @init_stack
+thread-103 stack is being mapped,  allocated size: 32768 B @init_stack
+thread-104 stack is being mapped,  allocated size: 32768 B @init_stack
+thread-105 stack is being mapped,  allocated size: 32768 B @init_stack
+thread-106 stack is being mapped,  allocated size: 32768 B @init_stack
+thread-107 stack is being mapped,  allocated size: 32768 B @init_stack
+thread-108 stack is being mapped,  allocated size: 32768 B @init_stack
+thread-109 stack is being mapped,  allocated size: 32768 B @init_stack
+thread-110 stack is being mapped,  allocated size: 32768 B @init_stack
+thread-110's destrcutor
+thread-110's destrcutor finished
+thread-35's destrcutor
+thread-35's destrcutor finished
+thread-36's destrcutor
+thread-36's destrcutor finished
+thread-42's destrcutor
+thread-42's destrcutor finished
+thread-43's destrcutor
+thread-43's destrcutor finished
+thread-44's destrcutor
+thread-44's destrcutor finished
+thread-37's destrcutor
+thread-37's destrcutor finished
+thread-38's destrcutor
+thread-38's destrcutor finished
+thread-39's destrcutor
+thread-39's destrcutor finished
+thread-40's destrcutor
+thread-40's destrcutor finished
+thread-41's destrcutor
+thread-41's destrcutor finished
+thread-45's destrcutor
+thread-45's destrcutor finished
+thread-46's destrcutor
+thread-46's destrcutor finished
+thread-48's destrcutor
+thread-48's destrcutor finished
+thread-49's destrcutor
+thread-49's destrcutor finished
+thread-51's destrcutor
+thread-51's destrcutor finished
+thread-50's destrcutor
+thread-50's destrcutor finished
+thread-47's destrcutor
+thread-47's destrcutor finished
+thread-56's destrcutor
+thread-56's destrcutor finished
+thread-57's destrcutor
+thread-57's destrcutor finished
+thread-58's destrcutor
+thread-58's destrcutor finished
+thread-59's destrcutor
+thread-59's destrcutor finished
+thread-60's destrcutor
+thread-60's destrcutor finished
+thread-61's destrcutor
+thread-61's destrcutor finished
+thread-62's destrcutor
+thread-62's destrcutor finished
+thread-63's destrcutor
+thread-63's destrcutor finished
+thread-64's destrcutor
+thread-64's destrcutor finished
+thread-65's destrcutor
+thread-65's destrcutor finished
+thread-66's destrcutor
+thread-66's destrcutor finished
+thread-67's destrcutor
+thread-67's destrcutor finished
+thread-52's destrcutor
+thread-52's destrcutor finished
+thread-53's destrcutor
+thread-53's destrcutor finished
+thread-54's destrcutor
+thread-54's destrcutor finished
+thread-55's destrcutor
+thread-55's destrcutor finished
+thread-68's destrcutor
+thread-68's destrcutor finished
+thread-69's destrcutor
+thread-69's destrcutor finished
+thread-70's destrcutor
+thread-70's destrcutor finished
+thread-71's destrcutor
+thread-71's destrcutor finished
+thread-72's destrcutor
+thread-72's destrcutor finished
+thread-73's destrcutor
+thread-73's destrcutor finished
+thread-74's destrcutor
+thread-74's destrcutor finished
+thread-75's destrcutor
+thread-75's destrcutor finished
+thread-76's destrcutor
+thread-76's destrcutor finished
+thread-80's destrcutor
+thread-80's destrcutor finished
+thread-77's destrcutor
+thread-77's destrcutor finished
+thread-78's destrcutor
+thread-78's destrcutor finished
+thread-79's destrcutor
+thread-79's destrcutor finished
+thread-84's destrcutor
+thread-84's destrcutor finished
+thread-81's destrcutor
+thread-81's destrcutor finished
+thread-82's destrcutor
+thread-82's destrcutor finished
+thread-83's destrcutor
+thread-83's destrcutor finished
+thread-88's destrcutor
+thread-88's destrcutor finished
+thread-85's destrcutor
+thread-85's destrcutor finished
+thread-86's destrcutor
+thread-86's destrcutor finished
+thread-87's destrcutor
+thread-87's destrcutor finished
+thread-89's destrcutor
+thread-89's destrcutor finished
+thread-90's destrcutor
+thread-90's destrcutor finished
+thread-91's destrcutor
+thread-91's destrcutor finished
+thread-92's destrcutor
+thread-92's destrcutor finished
+thread-93's destrcutor
+thread-93's destrcutor finished
+thread-94's destrcutor
+thread-94's destrcutor finished
+thread-95's destrcutor
+thread-95's destrcutor finished
+thread-96's destrcutor
+thread-96's destrcutor finished
+thread-97's destrcutor
+thread-97's destrcutor finished
+thread-98's destrcutor
+thread-98's destrcutor finished
+thread-99's destrcutor
+thread-99's destrcutor finished
+thread-100's destrcutor
+thread-100's destrcutor finished
+thread-101's destrcutor
+thread-101's destrcutor finished
+thread-102's destrcutor
+thread-102's destrcutor finished
+thread-103's destrcutor
+thread-103's destrcutor finished
+thread-104's destrcutor
+thread-104's destrcutor finished
+thread-105's destrcutor
+thread-105's destrcutor finished
+thread-106's destrcutor
+thread-106's destrcutor finished
+thread-107's destrcutor
+thread-107's destrcutor finished
+thread-108's destrcutor
+thread-108's destrcutor finished
+thread-109's destrcutor
+thread-109's destrcutor finished
+thread-111 stack is being mapped,  allocated size: 32768 B @init_stack
+thread-112 stack is being mapped,  allocated size: 32768 B @init_stack
+thread-113 stack is being mapped,  allocated size: 32768 B @init_stack
+thread-114 stack is being mapped,  allocated size: 32768 B @init_stack
+thread-115 stack is being mapped,  allocated size: 32768 B @init_stack
+thread-116 stack is being mapped,  allocated size: 32768 B @init_stack
+thread-117 stack is being mapped,  allocated size: 32768 B @init_stack
+thread-118 stack is being mapped,  allocated size: 32768 B @init_stack
+thread-119 stack is being mapped,  allocated size: 32768 B @init_stack
+thread-120 stack is being mapped,  allocated size: 32768 B @init_stack
+thread-121 stack is being mapped,  allocated size: 32768 B @init_stack
+thread-122 stack is being mapped,  allocated size: 32768 B @init_stack
+thread-123 stack is being mapped,  allocated size: 32768 B @init_stack
+thread-124 stack is being mapped,  allocated size: 32768 B @init_stack
+thread-125 stack is being mapped,  allocated size: 32768 B @init_stack
+thread-126 stack is being mapped,  allocated size: 32768 B @init_stack
+thread-127 stack is being mapped,  allocated size: 32768 B @init_stack
+thread-128 stack is being mapped,  allocated size: 32768 B @init_stack
+thread-129 stack is being mapped,  allocated size: 32768 B @init_stack
+thread-130 stack is being mapped,  allocated size: 32768 B @init_stack
+thread-131 stack is being mapped,  allocated size: 32768 B @init_stack
+thread-132 stack is being mapped,  allocated size: 32768 B @init_stack
+thread-133 stack is being mapped,  allocated size: 32768 B @init_stack
+thread-134 stack is being mapped,  allocated size: 32768 B @init_stack
+thread-135 stack is being mapped,  allocated size: 32768 B @init_stack
+thread-136 stack is being mapped,  allocated size: 32768 B @init_stack
+thread-137 stack is being mapped,  allocated size: 32768 B @init_stack
+thread-138 stack is being mapped,  allocated size: 32768 B @init_stack
+thread-139 stack is being mapped,  allocated size: 32768 B @init_stack
+thread-140 stack is being mapped,  allocated size: 32768 B @init_stack
+thread-141 stack is being mapped,  allocated size: 32768 B @init_stack
+thread-142 stack is being mapped,  allocated size: 32768 B @init_stack
+thread-143 stack is being mapped,  allocated size: 32768 B @init_stack
+thread-144 stack is being mapped,  allocated size: 32768 B @init_stack
+thread-145 stack is being mapped,  allocated size: 32768 B @init_stack
+thread-146 stack is being mapped,  allocated size: 32768 B @init_stack
+thread-147 stack is being mapped,  allocated size: 32768 B @init_stack
+thread-148 stack is being mapped,  allocated size: 32768 B @init_stack
+thread-149 stack is being mapped,  allocated size: 32768 B @init_stack
+thread-150 stack is being mapped,  allocated size: 32768 B @init_stack
+thread-151 stack is being mapped,  allocated size: 32768 B @init_stack
+thread-152 stack is being mapped,  allocated size: 32768 B @init_stack
+thread-153 stack is being mapped,  allocated size: 32768 B @init_stack
+thread-154 stack is being mapped,  allocated size: 32768 B @init_stack
+thread-155 stack is being mapped,  allocated size: 32768 B @init_stack
+thread-156 stack is being mapped,  allocated size: 32768 B @init_stack
+thread-157 stack is being mapped,  allocated size: 32768 B @init_stack
+thread-158 stack is being mapped,  allocated size: 32768 B @init_stack
+thread-159 stack is being mapped,  allocated size: 32768 B @init_stack
+thread-160 stack is being mapped,  allocated size: 32768 B @init_stack
+thread-161 stack is being mapped,  allocated size: 32768 B @init_stack
+thread-162 stack is being mapped,  allocated size: 32768 B @init_stack
+thread-163 stack is being mapped,  allocated size: 32768 B @init_stack
+thread-164 stack is being mapped,  allocated size: 32768 B @init_stack
+thread-165 stack is being mapped,  allocated size: 32768 B @init_stack
+thread-166 stack is being mapped,  allocated size: 32768 B @init_stack
+thread-167 stack is being mapped,  allocated size: 32768 B @init_stack
+thread-168 stack is being mapped,  allocated size: 32768 B @init_stack
+thread-169 stack is being mapped,  allocated size: 32768 B @init_stack
+thread-170 stack is being mapped,  allocated size: 32768 B @init_stack
+thread-171 stack is being mapped,  allocated size: 32768 B @init_stack
+thread-172 stack is being mapped,  allocated size: 32768 B @init_stack
+thread-173 stack is being mapped,  allocated size: 32768 B @init_stack
+thread-174 stack is being mapped,  allocated size: 32768 B @init_stack
+thread-175 stack is being mapped,  allocated size: 32768 B @init_stack
+thread-176 stack is being mapped,  allocated size: 32768 B @init_stack
+thread-177 stack is being mapped,  allocated size: 32768 B @init_stack
+thread-178 stack is being mapped,  allocated size: 32768 B @init_stack
+thread-179 stack is being mapped,  allocated size: 32768 B @init_stack
+thread-180 stack is being mapped,  allocated size: 32768 B @init_stack
+thread-181 stack is being mapped,  allocated size: 32768 B @init_stack
+thread-182 stack is being mapped,  allocated size: 32768 B @init_stack
+thread-183 stack is being mapped,  allocated size: 32768 B @init_stack
+thread-184 stack is being mapped,  allocated size: 32768 B @init_stack
+thread-185 stack is being mapped,  allocated size: 32768 B @init_stack
+thread-186 stack is being mapped,  allocated size: 32768 B @init_stack
+thread-187 stack is being mapped,  allocated size: 32768 B @init_stack
+thread-188 stack is being mapped,  allocated size: 32768 B @init_stack
+thread-189 stack is being mapped,  allocated size: 32768 B @init_stack
+application::application
+application::start_and_join
+application::main by id:27
+elf::program *application::program
+thread-27's name is zpool.so
+application::main ---> run_main() by id:27
+application::run_main @void
+thread-27's name is >init
+thread-190 stack is being mapped,  allocated size: 131072 B @init_stack
+thread-190's destrcutor
+thread-190's destrcutor finished
+thread-191 stack is being mapped,  allocated size: 131072 B @init_stack
+thread-191's destrcutor
+thread-191's destrcutor finished
+thread-192 stack is being mapped,  allocated size: 131072 B @init_stack
+thread-192's destrcutor
+thread-192's destrcutor finished
+thread-193 stack is being mapped,  allocated size: 131072 B @init_stack
+thread-193's destrcutor
+thread-193's destrcutor finished
+thread-194 stack is being mapped,  allocated size: 131072 B @init_stack
+thread-194's destrcutor
+thread-194's destrcutor finished
+thread-195 stack is being mapped,  allocated size: 131072 B @init_stack
+thread-195's destrcutor
+thread-195's destrcutor finished
+thread-196 stack is being mapped,  allocated size: 131072 B @init_stack
+thread-196's destrcutor
+thread-196's destrcutor finished
+thread-197 stack is being mapped,  allocated size: 131072 B @init_stack
+thread-197's destrcutor
+thread-197's destrcutor finished
+thread-198 stack is being mapped,  allocated size: 131072 B @init_stack
+thread-198's name is dhcp
+eth0: 192.168.122.15
+application:: run @args
+application:: run @new program
+application::application
+Get GoMain:1
+application::start
+thread-27 is mapping the child's stack , size: 4194304 B @allocate_stack
+thread-199's stack was mapped, allocated size: 4194304 B  @init_stack
+thread-27 created thread-199
+application::main by id:199
+elf::program *application::program
+thread-199 is mapping the child's stack , size: 4194304 B @allocate_stack
+thread-200's stack was mapped, allocated size: 4194304 B  @init_stack
+thread-199 created thread-200
+thread-199's name is /hello
+application::main ---> _entry_point:1 tid:199
+gettid: currnet thread id is 200
+thread-200 is mapping the child's stack , size: 4194304 B @allocate_stack
+thread-201's stack was mapped, allocated size: 4194304 B  @init_stack
+thread-200 created thread-201
+thread-200 is mapping the child's stack , size: 4194304 B @allocate_stack
+thread-202's stack was mapped, allocated size: 4194304 B  @init_stack
+gettid: currnet thread id is 201
+thread-200 created thread-202
+gettid: currnet thread id is 202
+gettid: currnet thread id is 199
+Hello, World
+
+Go version: go1.6.2
+application::start finished safely
+thread-199's destrcutor
+thread-199's destrcutor finished

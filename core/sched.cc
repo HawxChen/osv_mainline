@@ -24,6 +24,7 @@
 #include <unordered_map>
 #include <osv/wait_record.hh>
 #include <osv/preempt-lock.hh>
+#include<osv/stubbing.hh>
 #include <osv/app.hh>
 #include <osv/symbols.hh>
 
@@ -974,6 +975,9 @@ thread::thread(std::function<void ()> func, attr attr, bool main, bool app)
     if (!main && sched::s_current) {
         remote_thread_local_var(s_current) = this;
     }
+
+    //inifinte loop: OSv version
+    //debug_always("tid-%d is creating tid-%d\n", current()->id(), _id);
     init_stack();
 
     if (_attr._detached) {
@@ -1036,6 +1040,7 @@ osv::application *thread::current_app() {
 
 thread::~thread()
 {
+    debug_always("thread-%s's destrcutor\n", _id);
     cancel_this_thread_alarm();
 
     if (!_attr._detached) {
@@ -1059,6 +1064,7 @@ thread::~thread()
     }
     free_tcb();
     rcu_dispose(_detached_state.release());
+    debug_always("thread-%s's destrcutor finished\n", _id);
 }
 
 void thread::start()
@@ -1346,6 +1352,7 @@ unsigned int thread::id() const
 
 void thread::set_name(std::string name)
 {
+    debug_always("thread-%d's name is %s\n", _id, name);
     _attr.name(name);
 }
 

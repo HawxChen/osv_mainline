@@ -103,7 +103,8 @@ namespace pthread_private {
         bool detached;
         cpu_set_t *cpuset;
         sched::cpu *cpu;
-        thread_attr() : stack_begin{}, stack_size{1<<20}, guard_size{4096}, detached{false}, cpuset{nullptr}, cpu{nullptr} {}
+//        thread_attr() : stack_begin{}, stack_size{1<<20}, guard_size{4096}, detached{false}, cpuset{nullptr}, cpu{nullptr} {}
+        thread_attr() : stack_begin{}, stack_size{(1<<20)<<1}, guard_size{4096}, detached{false}, cpuset{nullptr}, cpu{nullptr} {}
     };
 
     pthread::pthread(void *(*start)(void *arg), void *arg, sigset_t sigset,
@@ -136,8 +137,11 @@ namespace pthread_private {
     sched::thread::stack_info pthread::allocate_stack(thread_attr attr)
     {
         if (attr.stack_begin) {
+            debug_always("thread-%d's child stack was mapped, size: %d B @allocate_stack\n", sched::thread::current()->id(),attr.stack_size);
             return {attr.stack_begin, attr.stack_size};
         }
+        attr.stack_size = attr.stack_size*2;
+            debug_always("thread-%d is mapping the child's stack , size: %d B @allocate_stack\n", sched::thread::current()->id(),attr.stack_size);
         size_t size = attr.stack_size;
         void *addr = mmu::map_anon(nullptr, size, mmu::mmap_populate, mmu::perm_rw);
         mmu::mprotect(addr, attr.guard_size, 0);
@@ -235,6 +239,8 @@ int pthread_create(pthread_t *thread, const pthread_attr_t *attr,
     }
 
     t = new pthread(start_routine, arg, sigset, &tmp);
+    debug_always("thread-%d created thread-%d\n", sched::thread::current()->id(), t->_thread->id());
+
     *thread = t->to_libc();
     t->start();
     return 0;
