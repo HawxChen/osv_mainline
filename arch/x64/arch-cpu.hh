@@ -42,7 +42,7 @@ struct arch_cpu {
     init_stack initstack;
     // The per-CPU exception stack is used for nested exceptions.
     static constexpr unsigned nr_exception_stacks = 2;
-    char percpu_exception_stack[nr_exception_stacks][4096] __attribute__((aligned(16)));
+    char percpu_exception_stack[nr_exception_stacks][4096*2] __attribute__((aligned(16)));
     u32 apic_id;
     u32 acpi_id;
     u64 gdt[nr_gdt];
@@ -58,8 +58,8 @@ struct arch_cpu {
 };
 
 struct arch_thread {
-    char interrupt_stack[4096] __attribute__((aligned(16)));
-    char exception_stack[4096*4] __attribute__((aligned(16)));
+    char interrupt_stack[4096*2] __attribute__((aligned(16)));
+    char exception_stack[4096*8] __attribute__((aligned(16)));
 };
 
 void fpu_state_init(processor::fpu_state *s);
