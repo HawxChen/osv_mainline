@@ -19,6 +19,8 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <fcntl.h>
+#include <osv/stubbing.hh>
+#include <iostream>
 
 namespace qi = boost::spirit::qi;
 namespace ascii = boost::spirit::ascii;
@@ -98,16 +100,24 @@ More than one $ is not supported, and "${AA}" is also not.
 */
 void expand_environ_vars(std::vector<std::vector<std::string>>& result)
 {
+    debug_always("In expand_environ_vars\n");
     std::vector<std::vector<std::string>>::iterator cmd_iter;
     std::vector<std::string>::iterator line_iter;
     for (cmd_iter=result.begin(); cmd_iter!=result.end(); cmd_iter++) {
+    debug_always("In expand_environ_vars @1\n");
         for (line_iter=cmd_iter->begin(); line_iter!=cmd_iter->end(); line_iter++) {
+            //debug_always("In expand_environ_vars: %s @2\n", tmp);
+            std::string line_str = *line_iter;
+            std::vector<char> writable(line_str.begin(), line_str.end());
+            writable.push_back('\0');
+            debug_always("writable: %s @@@\n",&(*(writable.begin())) );
+
             size_t pos;
             if ((pos = line_iter->find_first_of('$')) != std::string::npos) {
                 std::string new_word = line_iter->substr(0, pos);
                 std::string key = line_iter->substr(pos+1);
                 auto tmp = getenv(key.c_str());
-                //debug("    new_word=%s, key=%s, tmp=%s\n", new_word.c_str(), key.c_str(), tmp);
+                debug_always("Here   new_word=%s, key=%s, tmp=%s\n", new_word.c_str(), key.c_str(), tmp);
                 if (tmp) {
                     new_word += tmp;
                 }
