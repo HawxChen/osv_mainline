@@ -333,14 +333,19 @@ void application::prepare_argv(elf::program *program)
     // Prepare program_* variable used by the libc
     char *c_path = (char *)(_command.c_str());
     program_invocation_name = c_path;
+    debug_always("program_invocation_name: %s\n", program_invocation_name);
     program_invocation_short_name = basename(c_path);
+    debug_always("program_invocation_short_name: %s\n", program_invocation_short_name);
 
     // Allocate a continuous buffer for arguments: _argv_buf
     // First count the trailing zeroes
     auto sz = _args.size();
     // Then add the sum of each argument size to sz
+    int i_idx = 0;
     for (auto &str: _args) {
-        sz += str.size();
+        debug_always("_args[%d]: %s, len:%d\n", i_idx, _args[i_idx], str.size());
+        sz += str.size() + 1;
+        i_idx++;
     }
     _argv_buf.reset(new char[sz]);
 

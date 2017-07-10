@@ -931,24 +931,6 @@ std::string object::pathname()
     return _pathname;
 }
 
-// Run the object's static constructors or similar initialization
-void object::run_init_funcs(int argc, char** argv)
-{
-    if (dynamic_exists(DT_INIT)) {
-        auto func = dynamic_ptr<void>(DT_INIT);
-        if (func) {
-            reinterpret_cast<void(*)(int, char**)>(func)(argc, argv);
-        }
-    }
-    if (dynamic_exists(DT_INIT_ARRAY)) {
-        auto funcs = dynamic_ptr<void(*)(int, char**)>(DT_INIT_ARRAY);
-        auto nr = dynamic_val(DT_INIT_ARRAYSZ) / sizeof(*funcs);
-        for (auto i = 0u; i < nr; ++i) {
-            funcs[i](argc, argv);
-        }
-    }
-}
-
 #if 0
 void object::run_init_funcs()
 {
@@ -966,7 +948,27 @@ void object::run_init_funcs()
         }
     }
 }
-#endif 
+#endif
+// Run the object's static constructors or similar initialization
+void object::run_init_funcs(int argc, char** argv)
+{
+    if (dynamic_exists(DT_INIT)) {
+        auto func = dynamic_ptr<void>(DT_INIT);
+        if (func) {
+            std::cout << "DT_INIT is running" << std::endl;
+            reinterpret_cast<void(*)(int, char**)>(func)(argc, argv);
+        }
+    }
+    if (dynamic_exists(DT_INIT_ARRAY)) {
+        auto funcs = dynamic_ptr<void(*)(int, char**)>(DT_INIT_ARRAY);
+        auto nr = dynamic_val(DT_INIT_ARRAYSZ) / sizeof(*funcs);
+        for (auto i = 0u; i < nr; ++i) {
+            std::cout << "DT_INIT_ARRARY is running" << std::endl;
+            funcs[i](argc, argv);
+        }
+    }
+}
+
 
 // Run the object's static destructors or similar finalization
 void object::run_fini_funcs()
@@ -1186,6 +1188,29 @@ program::load_object(std::string name, std::vector<std::string> extra_path,
     }
 }
 
+#if 0
+std::shared_ptr<object>
+program::get_library(std::string name, std::vector<std::string> extra_path)
+{
+    SCOPE_LOCK(_mutex);
+    std::vector<std::shared_ptr<object>> loaded_objects;
+    auto ret = load_object(name, extra_path, loaded_objects);
+    if (ret) {
+        ret->init_static_tls();
+    }
+    // After loading the object and all its needed objects, run these objects'
+    // init functions in reverse order (so those of deepest needed object runs
+    // first) and finally make the loaded objects visible in search order.
+    auto size = loaded_objects.size();
+    for (int i = size - 1; i >= 0; i--) {
+        loaded_objects[i]->run_init_funcs();
+    }
+    for (unsigned i = 0; i < size; i++) {
+        loaded_objects[i]->setprivate(false);
+    }
+    return ret;
+}
+#endif
 std::shared_ptr<object>
 program::get_library(std::string name, std::vector<std::string> extra_path, bool no_init)
 {
@@ -1215,6 +1240,7 @@ program::get_library(std::string name, std::vector<std::string> extra_path, bool
 
 void program::init_library(int argc, char** argv)
 {
+    std::cout << "program::init_library" << std::endl;
     // get the list of weak pointers before iterating on them
     std::vector<std::shared_ptr<object>> loaded_objects =
         _loaded_objects_stack.top();
@@ -1224,6 +1250,7 @@ void program::init_library(int argc, char** argv)
     // first) and finally make the loaded objects visible in search order.
     auto size = loaded_objects.size();
     for (unsigned i = 0; i < size; i++) {
+        std::cout << "loading library["<< i << "]:" << loaded_objects[i]->pathname().c_str() << std::endl;
         loaded_objects[i]->setprivate(true);
     }
     for (int i = size - 1; i >= 0; i--) {
@@ -1236,29 +1263,6 @@ void program::init_library(int argc, char** argv)
     _loaded_objects_stack.pop();
 }
 
-#if 0
-std::shared_ptr<object>
-program::get_library(std::string name, std::vector<std::string> extra_path)
-{
-    SCOPE_LOCK(_mutex);
-    std::vector<std::shared_ptr<object>> loaded_objects;
-    auto ret = load_object(name, extra_path, loaded_objects);
-    if (ret) {
-        ret->init_static_tls();
-    }
-    // After loading the object and all its needed objects, run these objects'
-    // init functions in reverse order (so those of deepest needed object runs
-    // first) and finally make the loaded objects visible in search order.
-    auto size = loaded_objects.size();
-    for (int i = size - 1; i >= 0; i--) {
-        loaded_objects[i]->run_init_funcs();
-    }
-    for (unsigned i = 0; i < size; i++) {
-        loaded_objects[i]->setprivate(false);
-    }
-    return ret;
-}
-#endif
 
 void program::remove_object(object *ef)
 {
