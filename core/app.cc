@@ -254,6 +254,7 @@ int application::join()
 
     _joiner = sched::thread::current();
     _runtime.reset();
+    //sched::thread::current()->wake_with( [&] { _terminated.store(true); });
     sched::thread::wait_until([&] { return _terminated.load(); });
 
     _termination_request_callbacks.clear();

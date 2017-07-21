@@ -26,6 +26,7 @@
 #include <osv/preempt-lock.hh>
 #include <osv/app.hh>
 #include <osv/symbols.hh>
+#include <osv/stubbing.hh>
 
 MAKE_SYMBOL(sched::thread::current);
 MAKE_SYMBOL(sched::cpu::current);
@@ -1036,6 +1037,7 @@ osv::application *thread::current_app() {
 
 thread::~thread()
 {
+    debug_always("@~thread(): deleting tid:%d, _app_runtime's cnt:%d\n", _id, _app_runtime.use_count());
     cancel_this_thread_alarm();
 
     if (!_attr._detached) {
@@ -1059,6 +1061,8 @@ thread::~thread()
     }
     free_tcb();
     rcu_dispose(_detached_state.release());
+    //_app_runtime.reset();
+    debug_always("@~thread(): deleted tid:%d, _app_runtime's cnt:%d\n", _id, _app_runtime.use_count());
 }
 
 void thread::start()
