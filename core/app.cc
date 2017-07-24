@@ -20,6 +20,7 @@
 #include "libc/pthread.hh"
 #include<osv/stubbing.hh>
 #define __APP_SOL__
+#define __WORK_AROUND__
 
 
 using namespace boost::range;
@@ -254,6 +255,10 @@ int application::join()
 
     _joiner = sched::thread::current();
     _runtime.reset();
+#ifdef __WORK_AROUND__
+    debug_always("work-around solution\n" );
+    sched::thread::current()->wake_with( [&] { _terminated.store(true); });
+#endif
     sched::thread::wait_until([&] { return _terminated.load(); });
 
     _termination_request_callbacks.clear();
