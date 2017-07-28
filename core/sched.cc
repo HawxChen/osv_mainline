@@ -232,6 +232,7 @@ void cpu::schedule()
 void cpu::reschedule_from_interrupt(bool called_from_yield,
                                     thread_runtime::duration preempt_after)
 {
+    //TODO_TLS
     trace_sched_sched();
     assert(sched::exception_depth <= 1);
     need_reschedule = false;
@@ -974,6 +975,7 @@ thread::thread(std::function<void ()> func, attr attr, bool main, bool app)
     if (!main && sched::s_current) {
         remote_thread_local_var(s_current) = this;
     }
+    //TODO_TLS
     init_stack();
 
     if (_attr._detached) {
@@ -1036,6 +1038,7 @@ osv::application *thread::current_app() {
 
 thread::~thread()
 {
+    //TODO_TLS
     cancel_this_thread_alarm();
 
     if (!_attr._detached) {
