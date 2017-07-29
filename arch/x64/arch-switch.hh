@@ -101,9 +101,21 @@ void thread::switch_to_first()
            "r10", "r11", "r12", "r13", "r14", "r15", "memory");
 }
 
+void thread::init_sys_stack() {
+    //TODO_TLS
+    auto& stack = _attr._sys_stack;
+
+    if(!stack.size) {
+        stack.size = PAGE_SIZE;
+    }
+
+    if(!stack.begin) {
+        stack.begin = malloc(stack.size);
+    }
+}
+
 void thread::init_stack()
 {
-    //TODO_TLS
     auto& stack = _attr._stack;
     if (!stack.size) {
         stack.size = 65536;
@@ -150,6 +162,13 @@ void thread::setup_tcb()
     _tcb = static_cast<thread_control_block*>(p + tls.size + user_tls_size);
     _tcb->self = _tcb;
     _tcb->tls_base = p + user_tls_size;
+}
+
+void thread::free_sys_stack()
+{
+    //TODO_TLS
+    assert(_attr._sys_stack.begin);
+    free(_attr._sys_stack.begin);
 }
 
 void thread::free_tcb()

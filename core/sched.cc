@@ -975,8 +975,10 @@ thread::thread(std::function<void ()> func, attr attr, bool main, bool app)
     if (!main && sched::s_current) {
         remote_thread_local_var(s_current) = this;
     }
+
     //TODO_TLS
     init_stack();
+    init_sys_stack();
 
     if (_attr._detached) {
         _detach_state.store(detach_state::detached);
@@ -1061,6 +1063,7 @@ thread::~thread()
         delete[] _tls[i];
     }
     free_tcb();
+    free_sys_stack();
     rcu_dispose(_detached_state.release());
 }
 

@@ -159,6 +159,7 @@ call_signal_handler_thunk:
         iretq
         .cfi_endproc
 
+ #TODO_TLS
 .align 16
 .global syscall_entry
 syscall_entry:

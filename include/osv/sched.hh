@@ -328,6 +328,11 @@ class thread : private timer_base::client {
 private:
     struct detached_state;
 public:
+    struct sys_stack_info {
+        sys_stack_info() : begin(nullptr), size(PAGE_SIZE) { }
+        void* begin;
+        size_t size;
+    };
     struct stack_info {
         stack_info();
         stack_info(void* begin, size_t size);
@@ -338,6 +343,8 @@ public:
     };
     struct attr {
         stack_info _stack;
+        sys_stack_info _sys_stack;
+
         cpu *_pinned_cpu;
         bool _detached;
         std::array<char, 16> _name = {};
@@ -602,9 +609,11 @@ private:
     void prepare_wait();
     void wait();
     void stop_wait();
+    void init_sys_stack();
     void init_stack();
     void setup_tcb();
     void free_tcb();
+    void free_sys_stack();
     void complete() __attribute__((__noreturn__));
     template <class Action>
     inline void do_wake_with(Action action, unsigned allowed_initial_states_mask);

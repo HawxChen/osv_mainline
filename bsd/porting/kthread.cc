@@ -30,6 +30,8 @@ kthread_add(void (*func)(void *), void *arg, struct proc *p,
     va_start(va, fmt);
     vsnprintf(name_buf, sizeof(name_buf), fmt, va);
     va_end(va);
+
+    //TODO_TLS: it is related to attr &stack(size_t stacksize)  @include/osv/sched.hh
     sched::thread* t = sched::thread::make([=] { func(arg); },
             sched::thread::attr().detached().name(name_buf).stack(16 << 10));
     t->start();
@@ -47,6 +49,8 @@ int kproc_create(void (*func)(void *), void *arg, struct proc **p,
     va_start(va, str);
     vsnprintf(name_buf, sizeof(name_buf), str, va);
     va_end(va);
+
+    //TODO_TLS: it is related to attr &stack(size_t stacksize)  @include/osv/sched.hh
     sched::thread* t = sched::thread::make([=] { func(arg); },
             sched::thread::attr().detached().name(name_buf).stack(16 << 10));
     t->start();
