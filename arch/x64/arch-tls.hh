@@ -13,7 +13,7 @@
 struct thread_control_block {
     thread_control_block* self;
     void* tls_base;
-    //FIXME: Through linke and TLS, stack_addr could be deleted. 
+    //FIXME: Through linke and TLS, stack_addr could be deleted.
     //FIXME: The discussion form issue #808 provides details.
     void* stack_addr; //This field is used in arch/x64/entry.S for %fs's offset.
 };
