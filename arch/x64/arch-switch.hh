@@ -99,18 +99,6 @@ void thread::switch_to_first()
            "r10", "r11", "r12", "r13", "r14", "r15", "memory");
 }
 
-void thread::init_sys_stack() {
-    auto& stack = _attr._sys_stack;
-
-    if(!stack.size) {
-        stack.size = PAGE_SIZE;
-    }
-
-    if(!stack.begin) {
-        stack.begin = malloc(stack.size);
-    }
-}
-
 void thread::init_stack()
 {
     auto& stack = _attr._stack;
@@ -128,14 +116,9 @@ void thread::init_stack()
     _state.exception_stack = _arch.exception_stack + sizeof(_arch.exception_stack);
 }
 
-void thread::setup_tcb_stack() {
-    _tcb->stack_addr = static_cast<void*>  ((static_cast<void*>(_attr._sys_stack.begin)) + _attr._sys_stack.size);
-}
 void thread::setup_tcb()
 {
-    //_tcb's stack will be configured in thread::setup_tcb_stack();
     assert(tls.size);
-
 
     void* user_tls_data;
     size_t user_tls_size = 0;
@@ -163,12 +146,14 @@ void thread::setup_tcb()
     _tcb = static_cast<thread_control_block*>(p + tls.size + user_tls_size);
     _tcb->self = _tcb;
     _tcb->tls_base = p + user_tls_size;
-}
 
-void thread::free_sys_stack()
-{
-    assert(_attr._sys_stack.begin);
-    free(_attr._sys_stack.begin);
+    if(is_app()) {
+        auto& stack = _attr._sys_stack;
+
+        stack.size = PAGE_SIZE;
+        stack.begin = malloc(stack.size);
+        _tcb->syscall_stack_addr = static_cast<void*>((static_cast<void*>(stack.begin)) + stack.size);
+    }
 }
 
 void thread::free_tcb()
@@ -178,6 +163,10 @@ void thread::free_tcb()
         free(_tcb->tls_base - obj->initial_tls_size());
     } else {
         free(_tcb->tls_base);
+    }
+
+    if(is_app()) {
+        free(_attr._sys_stack.begin);
     }
 }
 

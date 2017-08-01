@@ -227,9 +227,6 @@ static const int IA_32_STAR_SYSCALL_SHIFT = 32;
 namespace processor {
 void init_syscall() {
     unsigned long cs = gdt_cs;
-
-    //It is obvious that there is no mode switching between syscall and user.
-    //In short, their addressing space will stay the same.
     processor::wrmsr(msr::IA32_STAR,  (cs << CS_SELECTOR_SHIFT) << IA_32_STAR_SYSCALL_SHIFT);
     // lstar is where syscall set rip so we set it to syscall_entry
     processor::wrmsr(msr::IA32_LSTAR, reinterpret_cast<uint64_t>(syscall_entry));

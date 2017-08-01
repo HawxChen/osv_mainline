@@ -976,8 +976,6 @@ thread::thread(std::function<void ()> func, attr attr, bool main, bool app)
     }
 
     init_stack();
-    init_sys_stack();
-    setup_tcb_stack();
 
     if (_attr._detached) {
         _detach_state.store(detach_state::detached);
@@ -1061,7 +1059,6 @@ thread::~thread()
         delete[] _tls[i];
     }
     free_tcb();
-    free_sys_stack();
     rcu_dispose(_detached_state.release());
 }
 
