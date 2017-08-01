@@ -126,7 +126,6 @@ namespace pthread_private {
     {
         sched::thread::attr a;
 
-        //TODO_TLS: it is related to attr &stack(size) @include/osv/sched.hh
         a.stack(allocate_stack(attr));
         a.detached(attr.detached);
         if (attr.cpu != nullptr) {

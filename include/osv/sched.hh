@@ -612,6 +612,7 @@ private:
     void init_sys_stack();
     void init_stack();
     void setup_tcb();
+    void setup_tcb_stack();
     void free_tcb();
     void free_sys_stack();
     void complete() __attribute__((__noreturn__));

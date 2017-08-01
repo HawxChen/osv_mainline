@@ -8,7 +8,6 @@
 #ifndef ARCH_THREAD_STATE_HH_
 #define ARCH_THREAD_STATE_HH_
 
-//TODO_TLS
 struct thread_state {
     char *exception_stack;
     void* rsp;

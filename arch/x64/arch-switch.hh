@@ -45,7 +45,6 @@ void set_fsbase(u64 v) __attribute__((ifunc("resolve_set_fsbase")));
 
 void thread::switch_to()
 {
-    //TODO_TLS
     thread* old = current();
     // writing to fs_base invalidates memory accesses, so surround with
     // barriers
@@ -79,7 +78,6 @@ void thread::switch_to()
 
 void thread::switch_to_first()
 {
-    //TODO_TLS
     barrier();
     processor::wrmsr(msr::IA32_FS_BASE, reinterpret_cast<u64>(_tcb));
     barrier();
@@ -102,7 +100,6 @@ void thread::switch_to_first()
 }
 
 void thread::init_sys_stack() {
-    //TODO_TLS
     auto& stack = _attr._sys_stack;
 
     if(!stack.size) {
@@ -131,10 +128,14 @@ void thread::init_stack()
     _state.exception_stack = _arch.exception_stack + sizeof(_arch.exception_stack);
 }
 
+void thread::setup_tcb_stack() {
+    _tcb->stack_addr = static_cast<void*>  ((static_cast<void*>(_attr._sys_stack.begin)) + _attr._sys_stack.size);
+}
 void thread::setup_tcb()
 {
-    //TODO_TLS
+    //_tcb's stack will be configured in thread::setup_tcb_stack();
     assert(tls.size);
+
 
     void* user_tls_data;
     size_t user_tls_size = 0;
@@ -166,14 +167,12 @@ void thread::setup_tcb()
 
 void thread::free_sys_stack()
 {
-    //TODO_TLS
     assert(_attr._sys_stack.begin);
     free(_attr._sys_stack.begin);
 }
 
 void thread::free_tcb()
 {
-    //TODO_TLS
     if (_app_runtime) {
         auto obj = _app_runtime->app.lib();
         free(_tcb->tls_base - obj->initial_tls_size());

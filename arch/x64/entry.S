@@ -159,7 +159,6 @@ call_signal_handler_thunk:
         iretq
         .cfi_endproc
 
- #TODO_TLS
 .align 16
 .global syscall_entry
 syscall_entry:
@@ -173,8 +172,9 @@ syscall_entry:
 
     # Skip the "red zone" allowed by the AMD64 ABI (the caller used a
     # SYSCALL instruction and doesn't know he called a function):
-    subq $128, %rsp
+    //subq $128, %rsp
 
+    xchg %rsp, %fs:16
     # Align the stack to 16 bytes. We align it now because of limitations of
     # the CFI language, but need to ensure it is still aligned before we call
     # syscall_wrapper(), so must ensure that the number of pushes below are
@@ -284,8 +284,11 @@ syscall_entry:
     # pop the stack value in flag register
     popfq
 
+/* If we use the same stack between applicatoin and system call
     #undo red-zone skip without altering restored flags
-    lea 128(%rsp), %rsp
+    //lea 128(%rsp), %rsp
+*/
+    xchg %rsp, %fs:16
 
     # jump to rcx where the syscall instruction put rip
     # (sysret would leave rxc cloberred so we have nothing to do to restore it)
