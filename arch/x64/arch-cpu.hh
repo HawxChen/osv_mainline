@@ -101,18 +101,7 @@ public:
     void lock() { _state.save(); }
     void unlock() { _state.restore(); }
 };
-/**
-enum  {
-    gdt_null = 0,
-    gdt_cs = 1,
-    gdt_ds = 2,
-    gdt_cs32 = 3,
-    gdt_tss = 4,
-    gdt_tssx = 5,
 
-    nr_gdt
-};
-**/
 inline arch_cpu::arch_cpu()
     : gdt{0, 0x00af9b000000ffff, 0x00cf93000000ffff, 0x00cf9b000000ffff,
           0x0000890000000067, 0}
