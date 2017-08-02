@@ -152,7 +152,8 @@ void thread::setup_tcb()
 
         stack.size = PAGE_SIZE;
         stack.begin = malloc(stack.size);
-        _tcb->syscall_stack_addr = static_cast<void*>((static_cast<void*>(stack.begin)) + stack.size);
+        stack.deleter = stack.default_deleter;
+        _tcb->syscall_stack_addr = stack.begin + stack.size;
     }
 }
 
@@ -166,7 +167,13 @@ void thread::free_tcb()
     }
 
     if(is_app()) {
-        free(_attr._syscall_stack.begin);
+        auto& stack = _attr._syscall_stack;
+
+        assert(stack.begin);
+
+        if(stack.deleter) {
+            stack.deleter(stack);
+        }
     }
 }
 
