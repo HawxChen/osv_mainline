@@ -340,7 +340,7 @@ public:
         stack_info _stack;
         // This stack is used only for application threads during SYSCALL instruction.
         // See issue #808 for why it's needed.
-        stack_info _sys_stack {};
+        stack_info _syscall_stack {};
 
         cpu *_pinned_cpu;
         bool _detached;
