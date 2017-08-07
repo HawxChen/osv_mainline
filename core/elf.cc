@@ -827,6 +827,8 @@ dladdr_info object::lookup_addr(const void* addr)
     if (addr < _base || addr >= _end) {
         return ret;
     }
+    ret.fname = _pathname.c_str();
+    ret.base = _base;
     auto strtab = dynamic_ptr<char>(DT_STRTAB);
     auto symtab = dynamic_ptr<Elf64_Sym>(DT_SYMTAB);
     auto len = symtab_len();
@@ -853,8 +855,6 @@ dladdr_info object::lookup_addr(const void* addr)
     if (!best.symbol || addr > best.relocated_addr() + best.size()) {
         return ret;
     }
-    ret.fname = _pathname.c_str();
-    ret.base = _base;
     ret.sym = strtab + best.symbol->st_name;
     ret.addr = best.relocated_addr();
     return ret;
@@ -1022,6 +1022,9 @@ void object::init_static_tls()
         }
         static_tls |= obj->_static_tls;
         _initial_tls_size = std::max(_initial_tls_size, obj->static_tls_end());
+	// Align initial_tls_size to 64 bytes, to not break the 64-byte
+	// alignment of the TLS segment defined in loader.ld.
+	_initial_tls_size = align_up(_initial_tls_size, (size_t)64);
     }
     if (!static_tls) {
         _initial_tls_size = 0;

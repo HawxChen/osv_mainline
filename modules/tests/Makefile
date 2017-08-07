@@ -86,7 +86,8 @@ tests := tst-pthread.so misc-ramdisk.so tst-vblk.so tst-bsd-evh.so \
 	tst-pthread-setcancelstate.so tst-syscall.so tst-pin.so tst-run.so \
 	tst-ifaddrs.so tst-pthread-affinity-inherit.so tst-sem-timed-wait.so \
 	tst-ttyname.so tst-pthread-barrier.so tst-feexcept.so tst-math.so \
-	tst-sigaltstack.so
+	tst-sigaltstack.so tst-fread.so tst-tcp-cork.so tst-tcp-v6.so \
+	tst-calloc.so
 
 #	libstatic-thread-variable.so tst-static-thread-variable.so \
 
@@ -95,6 +96,14 @@ tests += testrunner.so
 # Tests with special compilation parameters needed...
 $(out)/tests/tst-mmap.so: COMMON += -Wl,-z,now
 $(out)/tests/tst-elf-permissions.so: COMMON += -Wl,-z,relro
+
+# The following tests use special linker trickery which apprarently
+# doesn't work as expected with GOLD linker, so we need to choose BFD.
+# TODO: figure out why this workaround was needed (the reason may be
+# different for each of these tests), and avoid this workaround!
+$(out)/tests/tst-mmap.so: COMMON += -fuse-ld=bfd
+$(out)/tests/tst-elf-permissions.so: COMMON += -fuse-ld=bfd
+$(out)/tests/tst-tls.so: COMMON += -fuse-ld=bfd
 
 $(out)/tests/tst-tls.so: \
 		$(src)/tests/tst-tls.cc \

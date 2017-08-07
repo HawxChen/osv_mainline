@@ -197,6 +197,7 @@ int openat(int dirfd, const char *pathname, int flags, ...)
 
     return error;
 }
+LFS64(openat);
 
 // open() has an optional third argument, "mode", which is only needed in
 // some cases (when the O_CREAT mode is used). As a safety feature, recent
@@ -222,6 +223,7 @@ int creat(const char *pathname, mode_t mode)
 {
     return open(pathname, O_CREAT|O_WRONLY|O_TRUNC, mode);
 }
+LFS64(creat);
 
 TRACEPOINT(trace_vfs_close, "%d", int);
 TRACEPOINT(trace_vfs_close_ret, "");
@@ -1487,6 +1489,12 @@ int fcntl(int fd, int cmd, int arg)
         break;
     case F_GETLK:
         WARN_ONCE("fcntl(F_GETLK) stubbed\n");
+        break;
+    case F_SETLKW:
+        WARN_ONCE("fcntl(F_SETLKW) stubbed\n");
+        break;
+    case F_SETOWN:
+        WARN_ONCE("fcntl(F_SETOWN) stubbed\n");
         break;
     default:
         kprintf("unsupported fcntl cmd 0x%x\n", cmd);

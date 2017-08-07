@@ -406,7 +406,18 @@ public:
     // view of the application's page table (see issue #790).
     template <typename... Args>
     static thread* make(Args&&... args) {
-        return new thread(std::forward<Args>(args)...);
+        // As explained in <osv/aligned_new.hh>, in C++11 we cannot use
+        // new() on an object which has non-default alignment requirements.
+        // We cannot use the tool aligned_new<thread> from that header
+        // because of the private constructor, so need to repeat the trick.
+        // Note that avoiding new() is is not *really* important because
+        // sizeof(thread) very large (over 20 KB) and would get a 4096-byte
+        // alignment anyway, even if we allocated it with normal new.
+        void *p = aligned_alloc(alignof(thread), sizeof(thread));
+        if (!p) {
+            return nullptr;
+        }
+        return new(p) thread(std::forward<Args>(args)...);
     }
 private:
     explicit thread(std::function<void ()> func, attr attributes = attr(),
@@ -1009,9 +1020,9 @@ void preempt_enable();
 class interruptible
 {
 public:
-    static void prepare(thread* target_thread) throw()
+    static void prepare(thread* target_thread) noexcept
         { target_thread->interrupted(false); }
-    static void check(thread* target_thread, wait_guard& wg) throw(int) {
+    static void check(thread* target_thread, wait_guard& wg) {
         if(target_thread->interrupted()) {
             wg.stop();
             throw int(EINTR);
@@ -1022,9 +1033,9 @@ public:
 class noninterruptible
 {
 public:
-    static void prepare(thread* target_thread) throw()
+    static void prepare(thread* target_thread) noexcept
         {}
-    static void check(thread* target_thread, wait_guard& wg) throw()
+    static void check(thread* target_thread, wait_guard& wg) noexcept
         {}
 };
 
