@@ -146,6 +146,16 @@ void thread::setup_tcb()
     _tcb = static_cast<thread_control_block*>(p + tls.size + user_tls_size);
     _tcb->self = _tcb;
     _tcb->tls_base = p + user_tls_size;
+
+//    if(is_app()) {
+        auto& stack = _attr._syscall_stack;
+
+        stack.size = PAGE_SIZE;
+        stack.begin = malloc(stack.size);
+        stack.deleter = stack.default_deleter;
+        _tcb->syscall_stack_addr = stack.begin + stack.size;
+        debug_always("_tcb->syscall_stack_addr: 0x%08x\n", reinterpret_cast<u64>(_tcb->syscall_stack_addr));
+//    }
 }
 
 void thread::free_tcb()
@@ -156,6 +166,16 @@ void thread::free_tcb()
     } else {
         free(_tcb->tls_base);
     }
+
+//    if(is_app()) {
+        auto& stack = _attr._syscall_stack;
+
+        assert(stack.begin);
+
+        if(stack.deleter) {
+            stack.deleter(stack);
+        }
+//    }
 }
 
 void thread_main_c(thread* t)

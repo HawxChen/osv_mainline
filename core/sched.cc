@@ -975,6 +975,7 @@ thread::thread(std::function<void ()> func, attr attr, bool main, bool app)
     if (!main && sched::s_current) {
         remote_thread_local_var(s_current) = this;
     }
+
     init_stack();
 
     if (_attr._detached) {
