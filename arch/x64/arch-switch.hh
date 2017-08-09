@@ -147,7 +147,7 @@ void thread::setup_tcb()
     _tcb->self = _tcb;
     _tcb->tls_base = p + user_tls_size;
 
-//    if(is_app()) {
+    if(is_app()) {
         auto& stack = _attr._syscall_stack;
 
         stack.size = PAGE_SIZE;
@@ -155,7 +155,7 @@ void thread::setup_tcb()
         stack.deleter = stack.default_deleter;
         _tcb->syscall_stack_addr = stack.begin + stack.size;
         debug_always("_tcb->syscall_stack_addr: 0x%08x\n", reinterpret_cast<u64>(_tcb->syscall_stack_addr));
-//    }
+    }
 }
 
 void thread::free_tcb()
@@ -167,7 +167,7 @@ void thread::free_tcb()
         free(_tcb->tls_base);
     }
 
-//    if(is_app()) {
+    if(is_app()) {
         auto& stack = _attr._syscall_stack;
 
         assert(stack.begin);
@@ -175,7 +175,7 @@ void thread::free_tcb()
         if(stack.deleter) {
             stack.deleter(stack);
         }
-//    }
+    }
 }
 
 void thread_main_c(thread* t)
