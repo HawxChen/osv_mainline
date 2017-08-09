@@ -170,6 +170,7 @@ syscall_entry:
     .cfi_register rflags, r11 # r11 took previous rflags value
     # There is no ring transition and rflags are left unchanged.
 
+#if 0
     # Skip the "red zone" allowed by the AMD64 ABI (the caller used a
     # SYSCALL instruction and doesn't know he called a function):
     subq $128, %rsp
@@ -189,6 +190,9 @@ syscall_entry:
     pushq %rsp
     pushq (%rsp)
     andq $-16, %rsp
+#else
+    xchg %rsp, %fs:16
+#endif
 
     .cfi_def_cfa %rsp, 0
 
@@ -204,9 +208,13 @@ syscall_entry:
     # We do this just so we can refer to it with CFI and help gdb's DWARF
     # stack unwinding. This saving not otherwise needed for correct operation
     # (we anyway restore it below by undoing all our modifications).
+#if 0
     movq 24(%rsp), %rbp
     addq $128, %rbp
     pushq %rbp
+#else
+    pushq %fs:16
+#endif
     .cfi_adjust_cfa_offset 8
     .cfi_rel_offset %rsp, 0
 
@@ -275,16 +283,21 @@ syscall_entry:
     popq_cfi %rbp
     popq_cfi %rcx
 
-    movq 8(%rsp), %rsp # undo alignment (as explained above)
-
     # restore rflags
     # push the rflag state syscall saved in r11 to the stack
     pushq %r11
     # pop the stack value in flag register
     popfq
 
+#if 0
+    movq 8(%rsp), %rsp # undo alignment (as explained above)
+
+    #If we use the same stack between applicatoin and system call
     #undo red-zone skip without altering restored flags
     lea 128(%rsp), %rsp
+#else
+    xchg %rsp, %fs:16
+#endif
 
     # jump to rcx where the syscall instruction put rip
     # (sysret would leave rxc cloberred so we have nothing to do to restore it)
