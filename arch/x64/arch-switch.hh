@@ -147,7 +147,7 @@ void thread::setup_tcb()
     _tcb->self = _tcb;
     _tcb->tls_base = p + user_tls_size;
 
-    if(is_app()) {
+    if(1 || is_app()) {
         auto& stack = _attr._syscall_stack;
 
         stack.size = PAGE_SIZE;
@@ -167,7 +167,7 @@ void thread::free_tcb()
         free(_tcb->tls_base);
     }
 
-    if(is_app()) {
+    if(1 || is_app()) {
         auto& stack = _attr._syscall_stack;
 
         assert(stack.begin);
