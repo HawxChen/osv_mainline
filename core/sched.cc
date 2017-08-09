@@ -946,7 +946,6 @@ thread::thread(std::function<void ()> func, attr attr, bool main, bool app)
             }
         }
     }
-
     WITH_LOCK(thread_map_mutex) {
         if (!main) {
             auto ttid = _s_idgen;
@@ -967,6 +966,7 @@ thread::thread(std::function<void ()> func, attr attr, bool main, bool app)
             }
         }
     }
+    debug_always("is_app():%d,thread _id:%d is constructing...\n", is_app(), _id);
     // setup s_current before switching to the thread, so interrupts
     // can call thread::current()
     // remote_thread_local_var() doesn't work when there is no current
